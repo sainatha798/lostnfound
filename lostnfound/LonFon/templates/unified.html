@@ -1,0 +1,29 @@
+<div>
+<form  action={% url 'LonFon:search' %} method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in search %}<span>
+                    <div>
+                        <label>{{ field.label_tag }}</label>
+                        <div>{{ field }}</div>
+
+                             <span class="text-danger small">{{ field.errors }}</span>
+
+
+                    </div></span>
+
+                {% endfor %}
+
+
+                <button type="submit">SUBMIT</button>
+                {% if error %}
+                    <span>{{ error }}</span>
+                {% endif %}
+            </form>
+</div>
+<hr>
+<br><br>
+{% for element in query %}
+    <div><span>{{ element.lost_or_found }}--{{ element.subject }}--{{ element.location }}--{{ element.date }}</span><br>
+        <span id={{ forloop.counter }}>{{ element.description }}<br>{{ element.contact_id }}</span>
+    </div>
+{% endfor %}
